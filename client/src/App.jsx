@@ -18,16 +18,17 @@ export default function App() {
     getPosts()
       .then((data) => {
         setPosts(data);
+        console.log(data)
       })
       .catch((err) => {
         errorToast("Error al obtener los posts");
       });
-  }, [posts]);
+  }, []);
 
   const createPost = (post) => {
     addPost(post)
       .then((data) => {
-        setPosts([...posts, data]);
+        setPosts([...posts, data.result]);
         successToast("Post creado correctamente");
       })
       .catch((err) => {
@@ -72,9 +73,9 @@ export default function App() {
             </div>
           </div>
         </section>
-        <section className="col-12 col-md-4 mt-5">
+        <div className="col-12 col-md-8 mt-5">
+        <section className="d-flex row g-3">
           {posts.map((post) => {
-            console.log(post)
             return (
               <CardPost
                 key={post.id}
@@ -93,6 +94,7 @@ export default function App() {
             </div>
           )}
         </section>
+        </div>
       </main>
     </div>
   );
