@@ -89,7 +89,7 @@ export default function App() {
           {posts.length === 0 && (
             <div className="card">
               <div className="card-body">
-                <h2>No hay posts</h2>
+                <h2 className="text-center">No hay posts</h2>
               </div>
             </div>
           )}
