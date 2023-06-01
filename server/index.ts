@@ -3,8 +3,8 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
-import {pool} from "./db/database.js";
-import routes from "./routes/routes.js";
+import {pool} from "./db/database";
+import routes from "./routes/routes";
 
 const app = express();
 // Middleware
@@ -16,18 +16,12 @@ app.use(
 //ROUTES
 app.use("/", routes);
 
-// Error handling middleware at the end of pipeline (after routes)
-app.use((err, req, res, next) => {
-  console.error(err);
-  const statusCode = err.statusCode || 500;
-  res.status(statusCode).json({ok: false, error: err.message});
-});
 
 // Start server and check connection with database
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  pool.connect((err) => {
+  pool.connect((err: any) => {
     if (err) {
       console.error("Error connecting to the database:", err);
       process.exit(1);
