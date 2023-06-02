@@ -1,11 +1,12 @@
 import {pool} from "../db/database";
+import { Post } from "../types/types";
 
-export const findPosts = async ()  => {
+export const findPosts = async (): Promise<Post[]>  => {
   const {rows} = await pool.query("SELECT * FROM posts ORDER BY id ASC");
   return rows;
 };
 
-export const addPost = async (titulo: string, img: string, descripcion: string) => {
+export const addPost = async (titulo: string, img: string, descripcion: string): Promise<Post> => {
   if (!titulo || !img || !descripcion) {
     throw new Error("Faltan datos");
   }
@@ -15,14 +16,14 @@ export const addPost = async (titulo: string, img: string, descripcion: string) 
   return rows[0];
 };
 
-export const likePost = async (id: number) => {
+export const likePost = async (id: number): Promise<Post> => {
   const text = "UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING *";
   const {rows} = await pool.query(text, [id]);
   console.log(rows);
   return rows[0];
 };
 
-export const deletePost = async (id: number) => {
+export const deletePost = async (id: number): Promise<Post> => {
   const text = "DELETE FROM posts WHERE id = $1 RETURNING *";
   const {rows} = await pool.query(text, [id]);
   return rows[0];
