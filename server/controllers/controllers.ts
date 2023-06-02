@@ -35,7 +35,6 @@ const updatePost = async (req: Request, res: Response) => {
     if (Number.isNaN(+id)) {
       throw new Error("22P02");
     }
-
     const result = await likePost(+id);
     return res.json({ ok: true, result: result });
   } catch (err: any) {
@@ -48,6 +47,9 @@ const updatePost = async (req: Request, res: Response) => {
 const removePost = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    if (Number.isNaN(+id)) {
+      throw new Error("22P02");
+    }
     const result = await deletePost(+id);
     return res.json({ ok: true, result: result });
   } catch (err: any) {
