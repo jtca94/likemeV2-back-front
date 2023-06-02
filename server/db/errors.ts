@@ -1,4 +1,6 @@
+import { Code } from "../types/types";
 export const handleErrors = (code: string) => {
+    console.log(code)
     if (!code) {
         return {
             status: 500,
@@ -13,7 +15,7 @@ export const handleErrors = (code: string) => {
             };
         case "400":
             return {
-                status: 404,
+                status: 400,
                 message: "Faltan datos en la petición",
             };
         case "404":
@@ -21,6 +23,7 @@ export const handleErrors = (code: string) => {
                 status: 404,
                 message: "No existe ese registro",
             };
+            
         default:
             return {
                 status: 500,

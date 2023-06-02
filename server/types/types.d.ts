@@ -5,3 +5,7 @@ export interface Post {
     descripcion: string;
     likes: number;
 }
+
+export interface Code {
+    code: string;
+}
